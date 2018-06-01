@@ -1,0 +1,42 @@
+{% extends 'accounts/base.html' %}
+
+{% block main_content %} 
+<h1>Home Page - You are Logged in!</h1>
+<h3>Below are your list of websites: </h3>
+    {% if latest_websites %}
+        <table>
+            <tr>
+                <td>Website</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            {% for website in latest_websites %}
+                <tr>
+                    <td>
+                        <a href="{%url 'accounts:detail' website.id %}"><b>{{website.site_name}}</b></a>
+                    </td>
+                    <td>
+                        <form action="{% url 'accounts:website-update' website.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'accounts:website-delete' website.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>You don't have any websites. Please add some.</p>
+    {% endif %}
+{% endblock %} 

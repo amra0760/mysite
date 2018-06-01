@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% block main_content %}
+    <div class="container">
+        <div class='col-sm-6 col-sm-offset-3'>
+        <form method='POST' action='' enctype='multipart/form-data' class="form-signin">{% csrf_token %}
+            <!--{{ form}}-->
+            <!--<h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>-->
+            <input type="username" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type='submit' class='"btn btn-lg btn-primary btn-block' value='{{ title }}' />
+        </form>
+        </div>
+    </div>
+{% endblock %}

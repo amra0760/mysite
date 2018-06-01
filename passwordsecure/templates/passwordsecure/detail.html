@@ -1,0 +1,14 @@
+{% extends 'passwordsecure/base.html' %}
+{% block title %}Details{% endblock %}
+{% block main_content %}
+    <!--display question-->
+  <h2>Website: {{website.site_name}}</h2>
+  <h2>Email: {{website.email}}</h2>
+  <h2>Password: {{website.password}}</h2>
+  <h2> Additional Notes: {{website.notes}}</h2>
+
+  
+  <a href="{% url 'passwordsecure:index' %}">View this on the Homepage</a>
+  
+  </table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'polls/base.html' %}
+
+{% block main_content %}
+    <!--display question-->
+  <h1>{{question.question_text}}</h1>
+  <!--display error message-->
+  {% if error_message %} <P><strong> {{error_message}} </strong></P> {% endif %} 
+  
+  
+  <form action="{% url 'polls:vote' question.id %}" method="post">
+ 
+      <!--ensures data isn't stolen (Cross Site Request Forgeries)-->
+      {% csrf_token  %}
+      
+      <!--itterates over each choice and gives them a value and radio button-->
+      {% for choice in question.choice_set.all %}
+      
+      <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}"/>
+      <label for="choice{{forloop.counter}}"> {{choice.choice_text}}</label> <br>
+      
+      {% endfor%}
+      <input type="submit" class="btn btn-success" value="vote"/>
+  </form>
+  <a href="{% url 'polls:index' %}">Back to Questions List</a>
+  
+
+    <!--{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}-->
+    
+    <!--<form action="{% url 'polls:vote' question.id %}" method="post">-->
+    <!--{% csrf_token %}-->
+    <!--{% for choice in question.choice_set.all %}-->
+    <!--    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />-->
+    <!--    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />-->
+    <!--{% endfor %}-->
+    <!--<input type="submit" value="Vote" />-->
+    <!--</form>-->
+  
+{% endblock %}

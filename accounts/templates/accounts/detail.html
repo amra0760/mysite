@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+
+{% block main_content %} 
+<!--display question-->
+  <h1>{{website.site_name}}</h1>
+  <!--display error message-->
+  {% if error_message %} <P><strong> {{error_message}} </strong></P> {% endif %} 
+  
+  <table>
+      <tr>
+          <td>Emails</td>
+          <td>Passwords</td>
+      </tr>
+      {% for each_email in website.email_set.all %}
+      
+        <tr>
+          <td>{{each_email.email}}</td>
+          <td>{{each_email.password}}</td>
+        </tr>
+      
+      {% endfor%}
+  <a href="{% url 'accounts:index' %}">Back to Questions List</a>
+  
+  </table>
+{% endblock %} 
